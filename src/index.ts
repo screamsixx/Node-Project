@@ -2,10 +2,13 @@ import express from 'express';
 const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require('./swagger');
 import router from './routes';
+import cors from 'cors'; // Import the cors package
+
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+// Enable CORS for all origins
+app.use(cors());
 // Middlewares esenciales (en orden correcto)
 app.use(express.json()); // Para parsear application/json
 app.use(express.urlencoded({ extended: true })); // Para parsear application/x-www-form-urlencoded
