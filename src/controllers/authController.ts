@@ -3,58 +3,7 @@ import { simpleResponse } from '../utils/simpleResponse';
 import { authService } from '../services/authServices';
 
 export class authController {
-  /**
-   * @swagger
-   * /auth/login:
-   * post:
-   * summary: Inicia sesión de usuario
-   * description: >
-   * Autentica a un usuario utilizando su nombre de usuario y contraseña.
-   * Si las credenciales son correctas, devuelve el objeto completo del usuario
-   * (excluyendo la contraseña) junto con un token JWT de acceso.
-   * tags:
-   * - Autenticación
-   * requestBody:
-   * required: true
-   * content:
-   * application/json:
-   * schema:
-   * type: object
-   * required:
-   * - nombre_usuario
-   * - contraseña
-   * properties:
-   * nombre_usuario:
-   * type: string
-   * description: El nombre de usuario registrado.
-   * example: admin
-   * contraseña:
-   * type: string
-   * description: La contraseña del usuario.
-   * format: password
-   * example: admin123
-   * responses:
-   * 200:
-   * description: Autenticación exitosa.
-   * content:
-   * application/json:
-   * schema:
-   * type: object
-   * description: >
-   * El objeto del usuario sin la contraseña y con un campo 'token' añadido.
-   * allOf:
-   * - $ref: '#/components/schemas/Usuario'
-   * properties:
-   * token:
-   * type: string
-   * example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-   * 400:
-   * description: Datos de entrada inválidos. Falta nombre_usuario o contraseña.
-   * 401:
-   * description: No autorizado. Las credenciales proporcionadas son incorrectas.
-   * 500:
-   * description: Error interno del servidor.
-   */
+
   login(req: Request, res: Response) {
     const { nombre_usuario, contraseña } = req.body;
 
