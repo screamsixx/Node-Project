@@ -13,11 +13,22 @@ const options = {
                 url: 'http://localhost:3000/api',
             },
         ],
+        // SE AÑADE ÚNICAMENTE EL ESQUEMA DE SEGURIDAD
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
     },
     apis: ['./src/controllers/*.ts',
-        './src/models/*.ts'
+           './src/models/*.ts'
     ] // Especificar controladores
 };
 
 const specs = swaggerJsdoc(options);
 module.exports = specs;
+
