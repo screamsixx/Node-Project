@@ -18,13 +18,16 @@ const authMiddlewareInstance = new AuthMiddleware();
  * /usuarios:
  *   get:
  *     summary: Obtener todos los usuarios
- *     description: |
- *       Devuelve la lista completa de usuarios registrados en el sistema.
+ *     description: Devuelve la lista completa de usuarios registrados en el sistema.
  *     tags:
  *       - Usuarios
+ *     security:
+ *       - bearerAuth: []    # Ruta protegida
  *     responses:
  *       200:
  *         description: Lista de usuarios obtenida correctamente
+ *       401:
+ *         description: No autorizado
  *       500:
  *         description: Error al obtener usuarios
  */
@@ -34,11 +37,11 @@ const authMiddlewareInstance = new AuthMiddleware();
  * /usuarios/search:
  *   get:
  *     summary: Buscar usuarios por filtros
- *     description: |
- *       Permite filtrar usuarios por rol, email, nombre de usuario o estatus.
- *       Es obligatorio proporcionar al menos un filtro.
+ *     description: Permite filtrar usuarios por rol, email, nombre de usuario o estatus. Es obligatorio proporcionar al menos un filtro.
  *     tags:
  *       - Usuarios
+ *     security:
+ *       - bearerAuth: []    # Ruta protegida
  *     parameters:
  *       - in: query
  *         name: rol
@@ -61,6 +64,8 @@ const authMiddlewareInstance = new AuthMiddleware();
  *         description: Lista de usuarios filtrada correctamente
  *       400:
  *         description: No se proporcionó ningún filtro
+ *       401:
+ *         description: No autorizado
  *       500:
  *         description: Error al realizar la búsqueda
  */
@@ -72,6 +77,8 @@ const authMiddlewareInstance = new AuthMiddleware();
  *     summary: Obtener un usuario por ID
  *     tags:
  *       - Usuarios
+ *     security:
+ *       - bearerAuth: []    # Ruta protegida
  *     parameters:
  *       - in: path
  *         name: id
@@ -81,6 +88,8 @@ const authMiddlewareInstance = new AuthMiddleware();
  *     responses:
  *       200:
  *         description: Usuario encontrado
+ *       401:
+ *         description: No autorizado
  *       404:
  *         description: Usuario no encontrado
  *       500:
@@ -89,6 +98,8 @@ const authMiddlewareInstance = new AuthMiddleware();
  *     summary: Actualizar un usuario
  *     tags:
  *       - Usuarios
+ *     security:
+ *       - bearerAuth: []    # Ruta protegida
  *     parameters:
  *       - in: path
  *         name: id
@@ -105,6 +116,8 @@ const authMiddlewareInstance = new AuthMiddleware();
  *     responses:
  *       200:
  *         description: Usuario actualizado correctamente
+ *       401:
+ *         description: No autorizado
  *       404:
  *         description: Usuario no encontrado
  *       500:
@@ -113,6 +126,8 @@ const authMiddlewareInstance = new AuthMiddleware();
  *     summary: Eliminar un usuario
  *     tags:
  *       - Usuarios
+ *     security:
+ *       - bearerAuth: []    # Ruta protegida
  *     parameters:
  *       - in: path
  *         name: id
@@ -122,6 +137,8 @@ const authMiddlewareInstance = new AuthMiddleware();
  *     responses:
  *       200:
  *         description: Usuario eliminado correctamente
+ *       401:
+ *         description: No autorizado
  *       404:
  *         description: Usuario no encontrado
  *       500:
@@ -135,9 +152,7 @@ const authMiddlewareInstance = new AuthMiddleware();
  *     summary: Crear un nuevo usuario
  *     tags:
  *       - Usuarios
- *     description: |
- *       Crea un nuevo usuario en el sistema.
- *       Requiere nombre de usuario, email, contraseña, rol y al menos un teléfono.
+ *     description: Crea un nuevo usuario en el sistema. Requiere nombre de usuario, email, contraseña, rol y al menos un teléfono.
  *     requestBody:
  *       required: true
  *       content:
